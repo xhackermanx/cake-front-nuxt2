@@ -3,6 +3,7 @@
   <div
   >
     <button type="button" @click="getToken">token</button>
+    <div>{{token}}</div>
   </div>
 </template>
 
@@ -10,6 +11,11 @@
 
 export default {
   name: 'NuxtTutorial',
+  data() {
+    return {
+      token: ''
+    }
+  },
   mounted() {
     // if (process.client) {
       this.$fire.messaging.onMessage((payload) => {
@@ -25,8 +31,8 @@ export default {
       const data = await this.$fire.messaging.getToken({
         vapidKey: 'BJmpLFMCL1u3z776sQmGKRxenW9Twmc4KgQCSAyrGhY-bwUM5kfXJ730fjUTefvF4zrG-JwbxvkB3S7ysc8y7Fs'
       });
-
-      console.log(data)
+      this.token = data;
+      console.log(this.token)
       // const message = {
       //   // ...
       //   webpush: {
